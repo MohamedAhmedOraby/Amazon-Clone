@@ -16,7 +16,7 @@ FLAG_TYPES = (
 class Product (models.Model):
     name = models.CharField(_('name'),max_length=120)
     image = models.ImageField(_('image'),upload_to='products')
-    price = models.FloatField(_('image'),)
+    price = models.FloatField(_('price'))
     sku = models.IntegerField(_('sku'))
     subtitle = models.CharField(_('subtitle'),max_length=300)
     description = models.TextField(_('description'),max_length=20000)
@@ -36,7 +36,7 @@ class ProductImages (models.Model):
     product = models.ForeignKey(Product,related_name='product_images',on_delete=models.CASCADE)
     image = models.ImageField(upload_to='productimages')
     def __str__ (self):
-        return self.product
+        return str (self.product)
 
 
 class Brand (models.Model):
@@ -47,7 +47,7 @@ class Brand (models.Model):
         return self.name
 
 class ProductReview (models.Model): 
-    user = models.ForeignKey(Product,related_name='review_author',on_delete=models.SET_NULL,null=True,blank=True)
+    user = models.ForeignKey(User,related_name='review_author',on_delete=models.SET_NULL,null=True,blank=True)
     product = models.ForeignKey(Product,related_name='product_review',on_delete=models.CASCADE)
     rate = models.IntegerField(_('rate'))
     review = models.TextField(_('review'),max_length=400)
