@@ -11,7 +11,7 @@ class ProductList (ListView):
 class ProductDetail (DetailView): 
     model =  Product 
 
-def add_review (request,slug): 
+def add_review (request,slug):    
     product = Product.objects.get(slug=slug)
     if request.method == 'POST' : 
         form = ProductReviewForm(request.POST)
