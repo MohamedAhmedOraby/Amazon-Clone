@@ -7,6 +7,7 @@ from .forms import ProductReviewForm
 # Create your views here.
 class ProductList (ListView):
     model = Product
+    paginate_by = 50
 
 class ProductDetail (DetailView): 
     model =  Product 
