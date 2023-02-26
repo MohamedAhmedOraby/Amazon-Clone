@@ -1,5 +1,5 @@
 from django.shortcuts import render , redirect
-from .models import Product 
+from .models import Product ,  
 from django.views.generic import ListView , DetailView 
 from .forms import ProductReviewForm 
 
@@ -8,6 +8,7 @@ from .forms import ProductReviewForm
 class ProductList (ListView):
     model = Product
     paginate_by = 50
+    extra_context = {'all_count' : Product.objects.all().count()}
 
 class ProductDetail (DetailView): 
     model =  Product 
@@ -15,7 +16,7 @@ class ProductDetail (DetailView):
     def get_context_data(self, **kwargs):
         product = self.get_object()
         context = super().get_context_data(**kwargs)
-        context["related_products"] = Product.objects.filter(brand=product.brand)
+        context["related_products"] = Product.objects.filter(brand=product.brand)[:10]
         return context 
 def add_review (request,slug):    
     product = Product.objects.get(slug=slug)
@@ -27,6 +28,9 @@ def add_review (request,slug):
             myform.product = product 
             myform.save() 
     return redirect(f'/products/{product.slug}')
+
+
+
 
 
 
