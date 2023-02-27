@@ -32,6 +32,17 @@ class Product (models.Model):
         self.slug = slugify(self.name) 
         super (Product,self).save(*args , **kwargs) 
 
+    def avg_rate(self):
+        product_reviews = self.prduct_review.all()
+        if len(product_reviews)>0:
+            review_sum = 0
+            for rate in product_reviews:
+                review_sum += rate.rate
+            return review_sum/len(product_reviews)
+        else:
+            return 0
+
+
 class ProductImages (models.Model):
     product = models.ForeignKey(Product,related_name='product_images',on_delete=models.CASCADE)
     image = models.ImageField(upload_to='productimages')
@@ -58,5 +69,5 @@ class ProductReview (models.Model):
     review = models.TextField(_('review'),max_length=400)
     date = models.DateTimeField(default=timezone.now)
 
-    def __str__ (self):
+    def __str__(self):
         return str(self.user)
