@@ -1,5 +1,5 @@
 {% load static %}
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
     <head>
         <!--=====================================
@@ -44,10 +44,12 @@
 
         <!-- CUSTOM -->
         <link rel="stylesheet" href="{% static 'en/css/main.css' %}">
-
+        
         {% block css %}
             <link rel="stylesheet" href="{% static 'en/css/index.css' %}">
         {% endblock css %}
+            
+        
         <!--=====================================
                     CSS LINK PART END
         =======================================-->
@@ -151,14 +153,14 @@
                                 <li class="navbar-item dropdown">
                                     <a class="navbar-link " href="#">Home</a>
                                 </li>
-                                <li class="navbar-item dropdown-megamenu">
-                                    <a class="navbar-link" href="{% url 'products:product_list' %}">Shop</a>
+                                <li class="navbar-item">
+                                    <a class="navbar-link " href="{% url 'products:product_list' %}">Shop</a>
                                 </li>
                                 <li class="navbar-item">
-                                    <a class="navbar-link" href="#">Brand</a>
+                                    <a class="navbar-link" href="{% url 'products:brand_list' %}">Brands</a>
                                 </li>
                                 <li class="navbar-item">
-                                    <a class="navbar-link" href="#">Orders</a>
+                                    <a class="navbar-link" href="#">Orders</a> 
                                 </li>
                             </ul>
                             <div class="navbar-info-group">
@@ -747,9 +749,7 @@
 
 
         {% block body %}
-        
-        {% endblock body %} 
-
+        {% endblock body %}
 
         <!--=====================================
                      FOOTER PART START

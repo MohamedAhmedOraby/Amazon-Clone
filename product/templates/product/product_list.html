@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 
-
-
 {% block body %}
+    
 
+    
         <!--=====================================
                     BANNER PART START
         =======================================-->
@@ -361,7 +361,7 @@
                             </div>
                         </div>
                         <div class="row row-cols-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-4">
-                         {% for object in object_list %}
+                          {% for object in object_list %}
                             <div class="col">
                                 <div class="product-card">
                                     <div class="product-media">
@@ -379,12 +379,12 @@
                                     </div>
                                     <div class="product-content">
                                         <div class="product-rating">
-                                            <i class="active icofont-star"></i>
-                                            <i class="active icofont-star"></i>
-                                            <i class="active icofont-star"></i>
-                                            <i class="active icofont-star"></i>
-                                            <i class="icofont-star"></i>
-                                            <a href="product-video.html">(3)</a>
+                                            <i class="{% if object.avg_rate > 0 %} active {% endif %} icofont-star"></i>
+                                            <i class="{% if object.avg_rate > 1 %} active {% endif %} icofont-star"></i>
+                                            <i class="{% if object.avg_rate > 2 %} active {% endif %} icofont-star"></i>
+                                            <i class="{% if object.avg_rate > 3 %} active {% endif %} icofont-star"></i>
+                                            <i class="{% if object.avg_rate > 4 %} active {% endif %} icofont-star"></i>
+                                            <a href="product-video.html">({{object.prduct_review.all|length}})</a>
                                         </div>
                                         <h6 class="product-name">
                                             <a href="{% url 'products:product_detail' object.slug %}">{{object}}</a>
@@ -405,13 +405,13 @@
                                 </div>
                             </div>
                          {% endfor %}
-
                         </div>
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="bottom-paginate">
-                                    <p class="page-info">Showing 50 of  {{all_count}} Results</p>
+                                    <p class="page-info">Showing 50 of {{all_count}} Results</p>
                                     <ul class="pagination">
+                                        
                                         {% if page_obj.has_previous %}
                                             <li class="page-item">
                                                 <a class="page-link" href="?page={{page_obj.previous_page_number}}">
@@ -435,6 +435,8 @@
                                             </a>
                                          </li>
                                         {% endif %}
+                                            
+
                                     </ul>
                                 </div>
                             </div>
@@ -446,4 +448,4 @@
         <!--=====================================
                     SHOP PART END
         =======================================-->
-{% endblock body %} 
+ {% endblock body %}       
