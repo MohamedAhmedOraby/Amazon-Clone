@@ -1,5 +1,5 @@
 from rest_framework import serializers 
-from .models import Product , Brand , ProductReview
+from .models import Product , Brand , ProductReview 
 
 
 
@@ -32,3 +32,9 @@ class ProductDetailSerializer (serializers.ModelSerializer) :
         model = Product 
         fields = '__all__' 
 
+
+class BrandDetailSerializers (serializers.ModelSerializer) : 
+    products = ProductListSerializer(source='product_brand',many=True)
+    class Meta : 
+        model = Brand 
+        fields = '__all__' 
