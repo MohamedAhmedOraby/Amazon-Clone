@@ -24,9 +24,14 @@ class ProductReviewSerializer (serializers.ModelSerializer) :
 class ProductListSerializer (serializers.ModelSerializer) : 
     #brand = BrandSerializers () #show all brand details 
     brand = serializers.StringRelatedField #show brand name only 
+    price_with_tax = serializers.SerializerMethodField()
+
     class Meta : 
         model = Product 
         fields = '__all__' 
+
+    def get_price_with_tax (self,product): 
+        return product.price*1.1
 
 class ProductDetailSerializer (serializers.ModelSerializer) : 
     #brand = BrandSerializers () #show all brand details 
